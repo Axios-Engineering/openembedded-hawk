@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.redhawksdr.org"
 LICENSE = "LGPL"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
-DEPENDS = "omniorbpy omniorbpy-native log4cxx omniorb e2fsprogs apr-util apr zip expat boost boost-native python-numpy"
+DEPENDS = "omniorbpy omniorbpy-native log4cxx omniorb e2fsprogs apr-util apr zip expat boost-dev boost boost-native python-numpy python-threading"
 SRC_URI = "git://github.com/bagoulla/framework-core.git;branch=feature-no-xsd;protocol=git \
 "
 # I'm not sure how to set this to latest which is what I'd like.
