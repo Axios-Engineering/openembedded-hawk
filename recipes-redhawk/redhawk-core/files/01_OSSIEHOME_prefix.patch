@@ -1,0 +1,37 @@
+--- src/acinclude/ossie.m4
++++ src/acinclude.new/ossie.m4
+@@ -35,10 +35,11 @@ ossie_cv_ossie_home,
+              fi)
+ 
+ dnl Check if this is a cross, if so prepend the sysroot to the ossie home
+-if test "x$cross_compiling" == "xyes"; then
+-  CROSS_SYSROOT=`$CC --print-sysroot`
+-  ossie_cv_ossie_home=${CROSS_SYSROOT}${ossie_cv_ossie_home}
+-fi
++dnl Removed for bitbake since I believe it takes care of this for us
++dnl if test "x$cross_compiling" == "xyes"; then
++dnl   CROSS_SYSROOT=`$CC --print-sysroot`
++dnl   ossie_cv_ossie_home=${CROSS_SYSROOT}${ossie_cv_ossie_home}
++dnl fi
+ 
+ ])
+ AC_SUBST(OSSIE_HOME, $ossie_cv_ossie_home)
+@@ -64,15 +65,14 @@ fi
+ ])
+ 
+ dnl use OSSIEHOME as the default prefix unless --prefix is provided
++dnl Changed so that --prefix is ignored since bitbake passes in --prefix by default
+ AC_DEFUN([OSSIE_OSSIEHOME_AS_PREFIX],
+ [
+   AC_REQUIRE([OSSIE_OSSIEHOME])
+   if test "x${ossie_cv_ossie_home}" != "xNONE"; then
+-    if test "x${prefix}" == "xNONE"; then
+-      ac_default_prefix=${ossie_cv_ossie_home}
+-      prefix=${ossie_cv_ossie_home}
+-      AC_MSG_NOTICE(using ${ossie_cv_ossie_home} as installation prefix)
+-    fi
++    ac_default_prefix=${ossie_cv_ossie_home}
++    prefix=${ossie_cv_ossie_home}
++    AC_MSG_NOTICE(using ${ossie_cv_ossie_home} as installation prefix)
+   fi
+ ])
