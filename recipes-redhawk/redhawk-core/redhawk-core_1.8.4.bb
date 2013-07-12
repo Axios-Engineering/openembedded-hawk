@@ -10,8 +10,7 @@ file://01_OSSIEHOME_prefix.patch \
 # I'm not sure how to set this to latest which is what I'd like.
 SRCREV = "2204f010fe2c133b2ddc4cfaa38a75cd16ee8b54"
 
-
-PR = "r12" 
+PR = "r0" 
 
 S = "${WORKDIR}/git/src"
 
@@ -33,6 +32,10 @@ ${datadir}/xml/* \
 # I have no idea what this debug hidden directory is used for but it throws an error if not part of a debug package and I don't want to package it alone so we'll skip the check.
 INSANE_SKIP_${PN} += "debug-files"
 
+# We've got a couple static dev files and sym links we need and I don't want to worry about calling them out in their own package.
+INSANE_SKIP_${PN} += "staticdev"
+INSANE_SKIP_${PN} += "dev-so"
+
 
 # We apparently have to inherit from pythonnative if we do stuff with the system python.
 inherit autotools pkgconfig pythonnative
@@ -40,7 +43,7 @@ inherit autotools pkgconfig pythonnative
 # Added so it picks up the xsd header files
 #export LDFLAGS += "-L${STAGING_INCDIR}"
 
-EXTRA_OECONF += "--with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-filesystem=boost_filesystem --with-boost-thread=boost_thread --with-boost-regex=boost_regex --disable-java --with-ossie=${OSSIEHOME} --with-sdr=${SDRROOT}"
+EXTRA_OECONF += "--with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-filesystem=boost_filesystem --with-boost-thread=boost_thread --with-boost-regex=boost_regex --disable-java --with-ossie=${OSSIEHOME} --with-sdr=${SDRROOT} --exec_prefix=${OSSIEHOME} --prefix=${OSSIEHOME} --bindir=${OSSIEHOME}/bin --datadir=${OSSIEHOME}/share --libdir=${OSSIEHOME}/lib --disable-log4cxx"
 
 # Needed so that when the python distutils is run it can get the system prefix which, since it's the build system python will be /.../x86_64-linux/usr and replace it with our host systems name.
 do_install_prepend() {
