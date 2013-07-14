@@ -27,6 +27,13 @@ Getting Started
 
 7.) Optional: Modify the local.conf file and set BB_NUMBER_TREADS and PARRALLEL_MAKE to the number of threads your processor can support.  (This is generally 2x the number of cores).  Change the MACHINE to qemuarm so that we can use the cross-compiler toolchain.
 
+NOTE: You may or may not have to modify the boost.inc file which is located: poky-git/meta/recipes-support/boost/boost.inc
+Check for the following line and uncomment the commented out BOOST_LIBS line if it is commented out.
+
+ # FIXME: for some reason this fails on powerpc
+ # BOOST_LIBS += "serialization"
+
+
 8.) From [build-folder-name] run bitbake core-image-redhawk
 
 9.) Take a nap, this will run for a while.  Bitbake is downloading and building all the source code needed for a minimal linux distribution with redhawk.
