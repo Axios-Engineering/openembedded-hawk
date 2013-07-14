@@ -22,11 +22,17 @@ SDRROOT = "/var/redhawk/sdr/"
 
 FILES_${PN} += " \
 ${OSSIEHOME}/* \
+${STAGING_DIR_TARGET}${OSSIEHOME}/* \
 ${SDRROOT}/* \
+${STAGING_DIR_TARGET}${SDRROOT}/* \
 ${libdir}/python2.7/site-packages/ossie/* \
+${STAGING_DIR_NATIVE}${libdir}/python2.7/site-packages/ossie/* \
 ${libdir}/python2.7/site-packages/ossie* \
+${STAGING_DIR_NATIVE}${libdir}/python2.7/site-packages/ossie* \
 ${libdir}/python2.7/site-packages/redhawk/* \
+${STAGING_DIR_NATIVE}${libdir}/python2.7/site-packages/redhawk/* \
 ${datadir}/xml/* \
+${STAGING_DIR_TARGET}${datadir}/xml/* \
 "
 
 # I have no idea what this debug hidden directory is used for but it throws an error if not part of a debug package and I don't want to package it alone so we'll skip the check.
@@ -51,6 +57,16 @@ do_install_prepend() {
   export HOST_SYS=${HOST_SYS}
   export STAGING_INCDIR=${STAGING_INCDIR}
   export STAGING_LIBDIR=${STAGING_LIBDIR}
+
+  # Copy the acinclude folder to the aclocal arm sysroot so that we can build the GPP and BulkioInterfaces libraries later
+#  mkdir -p ${STAGING_DIR_TARGET}${OSSIEHOME}share/aclocal/ossie
+#  cp ${S}/acinclude/* ${STAGING_DIR_TARGET}${OSSIEHOME}share/aclocal/ossie
+}
+
+# I have no idea what I'm doing.  All I know is I want a copy of the install in the STAGING_DIR_TARGET and I want the python modueles in my STAGING_DIR_NATIVE
+do_install_append() {
+  cp -r ${D}/* ${STAGING_DIR_TARGET}
+  cp -r ${D}${OSSIEHOME}/lib/python/* ${STAGING_DIR_NATIVE}${libdir}/python2.7/site-packages/
 }
 
 # Information about python is generally determined during the configure call but it will check the host system and not the build system (since it makes calls to the system python)

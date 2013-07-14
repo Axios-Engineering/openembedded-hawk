@@ -35,3 +35,19 @@
 +    AC_MSG_NOTICE(using ${ossie_cv_ossie_home} as installation prefix)
    fi
  ])
+
+@@ -100,11 +100,9 @@ AC_DEFUN([OSSIE_SDRROOT_AS_PREFIX],
+ [
+   AC_REQUIRE([OSSIE_SDRROOT])
+   if test "x${ossie_cv_sdr_root}" != "x"; then
+-    if test "x${prefix}" == "xNONE"; then
+-      ac_default_prefix=${ossie_cv_sdr_root}/$1
+-      prefix=${ossie_cv_sdr_root}/$1
+-      AC_MSG_NOTICE(using ${ossie_cv_sdr_root}/$1 as installation prefix)
+-    fi
++    ac_default_prefix=${ossie_cv_sdr_root}/$1
++    prefix=${ossie_cv_sdr_root}/$1
++    AC_MSG_NOTICE(using ${ossie_cv_sdr_root}/$1 as installation prefix)
+   fi
+ ])
+
