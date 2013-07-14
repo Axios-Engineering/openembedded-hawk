@@ -4,7 +4,7 @@ openembedded-hawk
 
 A set of open embedded recipes for the redhawk core framework and its dependencies.  
 
-This is a work in progress and needs work before it can be deployed on any embedded hardware.  Once completed, this will allow redhawk to be built and run on many of the hardware sets which are supported by the Yocto and open embedded projects.  This includes the beagleboard, pasberry pi, gumstick, and many other platforms.
+This is a work in progress but has been tested on a qemuarm emulator.  In theory, these recipes will allow redhawk to be built and run on many of the hardware sets which are supported by the Yocto and open embedded projects.  This includes the beagleboard, pasberry pi, gumstick, and many other platforms.
 
 =================
 Getting Started
@@ -30,6 +30,8 @@ Getting Started
 8.) From [build-folder-name] run bitbake core-image-redhawk
 
 9.) Take a nap, this will run for a while.  Bitbake is downloading and building all the source code needed for a minimal linux distribution with redhawk.
+
+10.) Since REDHAWK was originally meant to run on x86 and x86_64 architectures, the SPD files for the domain manager, device manager, and GPP device will have a hard coded property of x86 and x86_64.  This will cause nodeBooter to fail without first being corrected for your systems processor type.  Determine your systems processor by running uname -p on your target system.  The hope is that in the near future this will be corrected in future releases.
 
 =================
 Resources
