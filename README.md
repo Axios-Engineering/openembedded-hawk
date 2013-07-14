@@ -14,7 +14,7 @@ Getting Started
 
 2.) Checkout the Poky repository mentioned here: https://www.yoctoproject.org/download/yocto-project-141-poky-901
 
-3.) Clone the openembedded-hawk repository inside the poky folder.  This will create a meta-redhawk folder.
+3.) Clone the openembedded-hawk repository inside the poky folder as meta-redhawk.
 
 4.) From poky/meta/recipes-core/images, copy core-image-minimal.bb to core-image-redhawk.bb and add the following line below line 3:
 
