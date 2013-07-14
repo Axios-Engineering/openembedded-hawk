@@ -18,7 +18,7 @@ Getting Started
 
 4.) From poky/meta/recipes-core/images, copy core-image-minimal.bb to core-image-redhawk.bb and add the following line below line 3:
 
- IMAGE_INSTALL += "dropbear redhawk-core"
+ IMAGE_INSTALL += "omniorbpy dropbear redhawk-core redhawk-gpp redhawk-bulkio python-modules python-numpy python-threading util-linux-uuidgen"
 
 
 5.) From the poky directory, "source oe-init-build-env [build-folder-name]" Where [build-folder-name] is where the build files will be kept (ex. "source oe-init-build-env mybuild")
