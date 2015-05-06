@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.redhawksdr.org"
 LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
-DEPENDS = "omniorbpy omniorbpy-native log4cxx omniorb e2fsprogs apr-util apr zip expat boost boost-native python-numpy python-threading python-numbers"
-RDEPENDS_${PN} = "python omniorbpy omniorb e2fsprogs apr-util apr zip expat boost python-numpy python-threading python-subprocess python-numbers python-xml"
+DEPENDS = "omniorbpy omniorbpy-native log4cxx omniorb e2fsprogs apr-util apr zip expat boost boost-native python-numpy python-threading python-numbers python-resource"
+RDEPENDS_${PN} = "python omniorbpy omniorb e2fsprogs apr-util apr zip expat boost python-numpy python-threading python-subprocess python-numbers python-xml python-resource"
 
 SRC_URI = "git://github.com/bagoulla/framework-core.git;branch=feature-no-xsd-1.10;protocol=git \
 file://01_OSSIEHOME_prefix.patch \
