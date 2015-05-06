@@ -59,6 +59,11 @@ do_compile_virtclass-native () {
     oe_runmake
 }
 
+# omniOrb already provides the init file
+do_install_append() {
+  rm -f ${D}${libdir}/python*/site-packages/omniidl_be/__init__.*
+}
+
 BBCLASSEXTEND = "native"
 
 NATIVE_INSTALL_WORKS = "1"

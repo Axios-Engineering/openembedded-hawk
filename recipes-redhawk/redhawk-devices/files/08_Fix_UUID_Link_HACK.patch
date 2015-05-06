@@ -1,0 +1,11 @@
+diff --git cpp/Makefile.am cpp/Makefile.am
+index bd6a072..513ab61 100644
+--- cpp/Makefile.am
++++ cpp/Makefile.am
+@@ -47,5 +47,5 @@ include $(srcdir)/Makefile.am.ide
+ RTL2832U_SOURCES = $(redhawk_SOURCES_auto)
+ RTL2832U_LDADD = $(PROJECTDEPS_LIBS) $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB) $(BOOST_REGEX_LIB) $(BOOST_SYSTEM_LIB) $(INTERFACEDEPS_LIBS) $(redhawk_LDADD_auto) $(LIBRTLSDR_LIBS)
+ RTL2832U_CXXFLAGS = -Wall $(PROJECTDEPS_CFLAGS) $(BOOST_CPPFLAGS) $(INTERFACEDEPS_CFLAGS) $(redhawk_INCLUDES_auto) $(LIBRTLSDR_FLAGS)
+-RTL2832U_LDFLAGS = -Wall $(redhawk_LDFLAGS_auto)
++RTL2832U_LDFLAGS = -Wall $(redhawk_LDFLAGS_auto) -luuid
+ 

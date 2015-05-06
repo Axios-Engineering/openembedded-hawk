@@ -1,5 +1,5 @@
 diff --git src/acinclude/ossie.m4 src/acinclude/ossie.m4
-index 450c285..8c90922 100644
+index 450c285..19fabfc 100644
 --- src/acinclude/ossie.m4
 +++ src/acinclude/ossie.m4
 @@ -38,11 +38,6 @@ AC_DEFUN([OSSIE_OSSIEHOME],
@@ -14,7 +14,7 @@ index 450c285..8c90922 100644
    ])
    AC_SUBST(OSSIE_HOME, $ossie_cv_ossie_home)
  ])
-@@ -66,20 +61,15 @@ else
+@@ -66,20 +61,12 @@ else
  fi
  ])
  
@@ -33,12 +33,9 @@ index 450c285..8c90922 100644
 -    prefix=${ossie_cv_ossie_home}
 -    AC_MSG_NOTICE(using ${ossie_cv_ossie_home} as installation prefix)
 -  ])
-+
-+  AC_REQUIRE([OSSIE_OSSIEHOME])
 +  ac_default_prefix=${ossie_cv_ossie_home}
 +  prefix=${ossie_cv_ossie_home}
 +  AC_MSG_NOTICE(using ${ossie_cv_ossie_home} as installation prefix)
-+
  ])
  
  dnl A variant on OSSIE_SDRROOT for use *only* when OSSIE_OSSIEHOME_AS_PREFIX is being used. Priorities:
