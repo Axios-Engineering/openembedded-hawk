@@ -1,0 +1,43 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          nodeconfig
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Should-Start:      $syslog
+# Should-Stop:       $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Makes sure a GPP node exists on boot
+# Description:       Runs the nodeconfig script at boot and ensures a node exists
+#                    
+### END INIT INFO
+
+OSSIEHOME=/usr/lib/redhawk/core
+SDRROOT=/usr/lib/redhawk/sdr
+PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
+NODENAME=DevMgr_GPP
+DevMgrPath=$SDRROOT/dev/nodes/$NODENAME
+DOMAIN=REDHAWK_DEV
+
+do_start() {
+  if [ -d $DevMgrPath ]
+  then
+    echo "Node $DevMgrPath already exists"
+  else
+    SDRROOT=$SDRROOT OSSIEHOME=$OSSIEHOME PYTHONPATH=$PYTHONPATH nodeconfig.py --inplace --domainname=$DOMAIN --nodename=$NODENAME
+  fi
+}
+
+case "$1" in
+  start)
+        do_start
+        ;;
+  *)
+        exit 0
+        ;;
+esac
+
+exit 0
+
