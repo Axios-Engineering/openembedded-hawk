@@ -1,7 +1,7 @@
 DESCRIPTION = "Python bindings for omniORB"
 SECTION =  "devel"
 PRIORITY = "optional"
-LICENSE = "LGPL"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=dcf3c825659e82539645da41a7908589"
 DEPENDS += "omniorb omniorbpy-native python"
 DEPENDS_virtclass-native += "omniorb-native python-native"
