@@ -13,6 +13,7 @@ file://03_Add_Missing_Files.patch \
 file://04_Remove_x86_DomMgr.patch \
 file://06_Fix_Idl_prefix.patch \
 file://07_arm_based_device_manager.patch \
+file://08_remove_csh_scripts.patch \
 "
 # I'm not sure how to set this to latest which is what I'd like.
 SRCREV = "c560f59e35b7fac5780094e998c90f57350bc5a9"
