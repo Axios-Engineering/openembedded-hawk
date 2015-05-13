@@ -1,52 +1,79 @@
-=================
-openembedded-hawk
+
+OpenEmbedded-Hawk
 =================
 
-A set of open embedded recipes for the redhawk core framework and its dependencies.  
+What is Yocto/Open-Embedded?
+---------------------------
+From the [Yocto][1] page itself:
 
-This is a work in progress but has been tested on a qemuarm emulator.  In theory, these recipes will allow redhawk to be built and run on many of the hardware sets which are supported by the Yocto and open embedded projects.  This includes the beagleboard, pasberry pi, gumstick, and many other platforms.
 
-=================
+>It's a complete embedded Linux development environment with tools, metadata, and documentation - everything you need. The free tools are easy to get started with, powerful to work with (including emulation environments, debuggers, an Application Toolkit Generator, etc.) and they allow projects to be carried forward over time without causing you to lose optimizations and investments made during the project’s prototype phase.
+
+In short, [Yocto][1] allows you to build a custom, light weight embedded linux distribution  built specifically for your hardware. 
+
+What is Openembedded-Hawk
+--------------------------
+Openembedded-hawk is a set of [Yocto][1]/[Open-Embedded][2] recipes for the [REDHAWK][3] framework, its dependencies, and a handful of example components, devices, and shared libraries.
+
+This repository, along with the base Yocto framework will enable you to build the REDHAWK framework for any hardware platform in which a Board Support Package is available. 
+
+Is my hardware supported?
+-------------------------
+The Yocto website provides a list of [Official BSPs][4] which include common hardware platforms like the Raspberry Pi, BeagleBoard, BeagleBone, NUC, Intel Atom, etc.
+
+There are plenty of BSPs floating around for other hardware platforms so do some searching before you write your own.
+
 Getting Started
-=================
+----------------
 
-1.) Install all the requird software listed here: http://openembedded.org/wiki/Getting_started
+1. Install the required software listed in the [Yocto Quick Start Packages Section][6]
 
-2.) Checkout the Poky repository mentioned here: https://www.yoctoproject.org/download/yocto-project-141-poky-901
+2. Checkout the Yocto Poky repositories dizzy branch:
 
-3.) Clone the openembedded-hawk repository inside the poky folder as meta-redhawk.
-
-4.) From poky/meta/recipes-core/images, copy core-image-minimal.bb to core-image-redhawk.bb and add the following line below line 3:
-
- IMAGE_INSTALL += "omniorbpy dropbear redhawk-core redhawk-gpp redhawk-bulkio python-modules python-numpy python-threading util-linux-uuidgen"
+    git clone -b dizzy git://git.yoctoproject.org/poky.git
 
 
-5.) From the poky directory, "source oe-init-build-env [build-folder-name]" Where [build-folder-name] is where the build files will be kept (ex. "source oe-init-build-env mybuild")
+3. Clone the openembedded-hawk repository inside the poky folder as meta-redhawk.
 
-6.) From [build-folder-name]/conf modify the bblayers.conf file and add the meta-redhawk folder which was cloned into the poky folder in step 3.
+    ```
+    cd poky
+    git clone https://github.com/Axios-Engineering/openembedded-hawk.git meta-redhawk
+    ```
 
-7.) Optional: Modify the local.conf file and set BB_NUMBER_TREADS and PARRALLEL_MAKE to the number of threads your processor can support.  (This is generally 2x the number of cores).  Change the MACHINE to qemuarm so that we can use the cross-compiler toolchain.
+4. Source the build-env script
 
-NOTE: You may or may not have to modify the boost.inc file which is located: poky-git/meta/recipes-support/boost/boost.inc
-Check for the following line and uncomment the commented out BOOST_LIBS line if it is commented out.
+    ```
+    source oe-init-build-env
+    ```
 
- # FIXME: for some reason this fails on powerpc
- # BOOST_LIBS += "serialization"
+5. Pick a machine type within the conf/local.conf file. The default will build for an emulated x86 machine type.
 
+6. Add REDHAWK recipes to the build image. The easiest way to do this is by using the conf/local.conf file and adding the IMAGE_INSTALL_append variable at the end. Here is an example that adds the core framework, frontend, and a GPP. Note that all the dependencies will automatically be built including redhawk-core
 
-8.) From [build-folder-name] run bitbake core-image-redhawk
+    ```
+    IMAGE_INSTALL_append = " redhawk-frontend redhawk-gpp"
+    ```
 
-9.) Take a nap, this will run for a while.  Bitbake is downloading and building all the source code needed for a minimal linux distribution with redhawk.
+6. Add the meta-redhawk directory to the BBLAYERS variable in conf/bblayers.conf so yocto knows where to search for our custom recipes.
 
-10.) Since REDHAWK was originally meant to run on x86 and x86_64 architectures, the SPD files for the domain manager, device manager, and GPP device will have a hard coded property of x86 and x86_64.  This will cause nodeBooter to fail without first being corrected for your systems processor type.  Determine your systems processor by running uname -p on your target system.  The hope is that in the near future this will be corrected in future releases.
+7. Build an image:
 
-=================
-Resources
-=================
+    ```
+    bitbake core-image-minimal
+    ```
 
-Yocto Mega Manual: http://www.yoctoproject.org/docs/latest/mega-manual/mega-manual.html
+Additional Resources
+--------------------
 
-Using Yocto for RaspberryPi: http://www.pimpmypi.com/blog/blogPost.php?blogPostID=7
+[Yocto Mega Manual][7] 
 
-Bitbake cheatsheet: http://www.openembedded.org/wiki/Bitbake_cheat_sheet
+[Bitbake cheatsheet][8]
 
+[1]: https://www.yoctoproject.org/  "Yocto Project Homepage"
+[2]: http://www.openembedded.org/wiki/Main_Page  "Open-Embedded Project Homepage"
+[3]: http://redhawksdr.org "REDHAWK Homepage"
+[4]: https://www.yoctoproject.org/downloads/bsps?release=All&title= "Board Support Package List"
+[5]: https://github.com/EttusResearch/meta-ettus "Ettus BSP"
+[6]: http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html#packages "Required Packages"
+[7]: http://www.yoctoproject.org/docs/latest/mega-manual/mega-manual.html "Yocto Mega Manual"
+[8]: http://www.openembedded.org/wiki/Bitbake_cheat_sheet "Bitbake Cheat Sheet"
