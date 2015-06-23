@@ -14,6 +14,7 @@ file://04_Remove_x86_DomMgr.patch \
 file://06_Fix_Idl_prefix.patch \
 file://07_arm_based_device_manager.patch \
 file://08_remove_csh_scripts.patch \
+file://allow_idl_dir_set.patch \
 "
 # I'm not sure how to set this to latest which is what I'd like.
 SRCREV = "c560f59e35b7fac5780094e998c90f57350bc5a9"
@@ -25,6 +26,8 @@ S = "${WORKDIR}/git/src"
 # Set install location OSSIEHOME and SDRROOT
 OSSIEHOME = "/usr/lib/redhawk/core"
 SDRROOT = "/usr/lib/redhawk/sdr"
+
+
 
 FILES_${PN} += " \
 /usr/share/* \
@@ -44,7 +47,7 @@ ${SDRROOT}/dom/mgr/.debug/* \
 # autotools-brokensep is the sasme as autotools but our build and src locations are the same since we cannot build away from our src.
 inherit autotools-brokensep pkgconfig pythonnative 
 
-EXTRA_OECONF += "--with-ossie=${OSSIEHOME} --with-sdr=${SDRROOT} --with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-filesystem=boost_filesystem --with-boost-thread=boost_thread --with-boost-regex=boost_regex --disable-java --with-expat=${STAGING_DIR_TARGET}/usr --disable-log4cxx"
+EXTRA_OECONF += "--with-ossie=${OSSIEHOME} --with-sdr=${SDRROOT} --with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-filesystem=boost_filesystem --with-boost-thread=boost_thread --with-boost-regex=boost_regex --disable-java --with-expat=${STAGING_DIR_TARGET}/usr --disable-log4cxx idldir=${STAGING_DIR_TARGET}/usr/share/idl/omniORB OMNICOS_IDLDIR=${STAGING_DIR_TARGET}/usr/share/idl/omniORB/COS"
 
 # Needed so that when the python distutils is run it can get the system prefix.
 do_install_prepend() {
