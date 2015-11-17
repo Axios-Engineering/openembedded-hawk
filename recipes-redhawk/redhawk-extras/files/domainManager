@@ -1,0 +1,75 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          domainManager
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Should-Start:      $syslog
+# Should-Stop:       $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts up the REDHAWK domain manager
+# Description:       Starts up the REDHAWK domain manager
+#                    
+### END INIT INFO
+
+OSSIEHOME=/usr/lib/redhawk/core
+SDRROOT=/usr/lib/redhawk/sdr
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OSSIEHOME/lib:$OSSIEHOME/lib64
+PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
+DOMAIN=REDHAWK_DEV
+PIDFILE=/var/run/domain.pid
+LOGFILE=/var/log/domainManager.log
+
+DAEMON_ARGS="-D --pidfile $PIDFILE --daemon 2>&1 > $LOGFILE"
+
+do_start() {
+  if [ -f $PIDFILE ]; then
+    echo "PID file exists. Is the domain running?"
+  else
+    # Wait in case omniNames is coming up
+    sleep 2
+    nodeBooter $DAEMON_ARGS
+  fi
+}
+
+do_stop() {
+  echo "Stopping Domain Manager on PID $(cat $PIDFILE)"
+  if ! kill $(cat $PIDFILE); then
+    echo "Standard kill failed to stop domain manager, escalating!"
+    kill -9 $(cat $PIDFILE)
+  fi
+
+  rm -f $PIDFILE
+}
+
+do_status() {
+  if [ -f $PIDFILE ]; then
+    echo "I think the Domain Manager is running on PID $(cat $PIDFILE)"
+  else
+    echo "I dont think its running boss"
+  fi
+}
+
+case "$1" in
+  start)
+        do_start
+        ;;
+  stop)
+        do_stop
+        ;;
+  status)
+        do_status
+        ;;
+  reset)
+        do_stop
+        do_start
+        ;;
+  *)
+        exit 0
+        ;;
+esac
+
+exit 0
+

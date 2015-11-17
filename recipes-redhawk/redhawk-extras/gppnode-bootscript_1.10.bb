@@ -6,7 +6,7 @@ DEPENDS += "redhawk-gpp"
 PR = "r0"
 
 SRC_URI = "\
-file://nodeconfig \
+file://gppnode \
 file://COPYING \
 "
 
@@ -16,11 +16,11 @@ S = "${WORKDIR}"
 
 inherit update-rc.d
 
-INITSCRIPT_NAME = "nodeconfig"
+INITSCRIPT_NAME = "gppnode"
 INITSCRIPT_PARAMS = "defaults 99"
 
 do_install () {
         install -d ${D}${sysconfdir} ${D}${sysconfdir}/init.d 
-        install -m 0755 ${WORKDIR}/nodeconfig ${D}${sysconfdir}/init.d/nodeconfig
+        install -m 0755 ${WORKDIR}/gppnode ${D}${sysconfdir}/init.d/gppnode
 }
 

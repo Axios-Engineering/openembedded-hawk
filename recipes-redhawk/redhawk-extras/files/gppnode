@@ -20,18 +20,56 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/pytho
 NODENAME=DevMgr_GPP
 DevMgrPath=$SDRROOT/dev/nodes/$NODENAME
 DOMAIN=REDHAWK_DEV
+PIDFILE=/var/run/gppNode.pid
+LOGFILE=/var/log/gppnode.log
+DAEMON_ARGS="-d $DevMgrPath/DeviceManager.dcd.xml --pidfile $PIDFILE --daemon 2>&1 > $LOGFILE"
 
 do_start() {
   if [ -d $DevMgrPath ]
   then
-    echo "Node $DevMgrPath already exists"
+    echo "Node $DevMgrPath already exists, starting existing node"
   else
     SDRROOT=$SDRROOT OSSIEHOME=$OSSIEHOME PYTHONPATH=$PYTHONPATH nodeconfig.py --inplace --domainname=$DOMAIN --nodename=$NODENAME
+  fi
+
+  if [ -f $PIDFILE ]; then
+    echo "PID file exists. Is the node already running?"
+  else
+    nodeBooter $DAEMON_ARGS
+  fi
+
+}
+
+do_stop() {
+  echo "Stopping Device Manager on PID $(cat $PIDFILE)"
+  if ! kill $(cat $PIDFILE); then
+    echo "Standard kill failed to stop domain manager, escalating!"
+    kill -9 $(cat $PIDFILE)
+  fi
+
+  rm -f $PIDFILE
+}
+
+do_status() {
+  if [ -f $PIDFILE ]; then
+    echo "I think the Device Manager is running on PID $(cat $PIDFILE)"
+  else
+    echo "I dont think its running boss"
   fi
 }
 
 case "$1" in
   start)
+        do_start
+        ;;
+  stop)
+        do_stop
+        ;;
+  status)
+        do_status
+        ;;
+  reset)
+        do_stop
         do_start
         ;;
   *)

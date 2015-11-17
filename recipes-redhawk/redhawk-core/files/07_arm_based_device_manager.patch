@@ -1,35 +1,21 @@
-diff --git a/src/control/sdr/devmgr/DeviceManager.spd.xml b/src/control/sdr/devmgr/DeviceManager.spd.xml
-index c5f1b76..2822121 100644
+diff --git src/control/sdr/devmgr/DeviceManager.spd.xml src/control/sdr/devmgr/DeviceManager.spd.xml
+index c5f1b76..e6d8f84 100644
 --- src/control/sdr/devmgr/DeviceManager.spd.xml
 +++ src/control/sdr/devmgr/DeviceManager.spd.xml
-@@ -31,27 +31,15 @@ with this program.  If not, see http://www.gnu.org/licenses/.
-         <localfile name="DeviceManager.scd.xml"/>
-     </descriptor>
-     <implementation id="DCE:d3e8aba5-4421-45c5-9be6-372b763883e7">
--        <description>x86 Implementation of a Device Manager</description>
-+        <description>armv7l Implementation of a Device Manager</description>
-         <propertyfile>
--            <localfile name="DeviceManager.Linux.x86.prf.xml"/>
-+            <localfile name="DeviceManager.Linux.armv7l.prf.xml"/>
-         </propertyfile>
-         <code type="Executable">
-             <localfile name="DeviceManager"/>
-             <entrypoint>DeviceManager</entrypoint>
-         </code>
+@@ -54,4 +54,16 @@ with this program.  If not, see http://www.gnu.org/licenses/.
          <os name="Linux" />
--        <processor name="x86"/>
--    </implementation>
--    <implementation id="DCE:5fbef908-52fa-4fd8-ad88-2a72a6b8b5d4">
--        <description>x86_64 Implementation of a Device Manager</description>
--        <propertyfile>
--            <localfile name="DeviceManager.Linux.x86_64.prf.xml"/>
--        </propertyfile>
--        <code type="Executable">
--            <localfile name="DeviceManager"/>
--            <entrypoint>DeviceManager</entrypoint>
--        </code>
--        <os name="Linux" />
--        <processor name="x86_64"/>
-+        <processor name="armv7l"/>
+         <processor name="x86_64"/>
      </implementation>
++    <implementation id="DCE:6b1a5ea9-2812-4532-88b2-b5c14c30cf12">
++        <description>armv7l Implementation of a Device Manager</description>
++        <propertyfile>
++            <localfile name="DeviceManager.Linux.armv7l.prf.xml"/>
++        </propertyfile>
++        <code type="Executable">
++            <localfile name="DeviceManager"/>
++            <entrypoint>DeviceManager</entrypoint>
++        </code>
++        <os name="Linux" />
++        <processor name="armv7l"/>
++    </implementation>
  </softpkg>
