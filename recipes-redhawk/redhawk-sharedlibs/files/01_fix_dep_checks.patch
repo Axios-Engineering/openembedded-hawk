@@ -1,0 +1,43 @@
+diff --git cpp/Makefile.am cpp/Makefile.am
+index 27803a2..a4f1513 100644
+--- cpp/Makefile.am
++++ cpp/Makefile.am
+@@ -36,8 +36,8 @@ distclean-local:
+ # you wish to manually control these options.
+ include $(srcdir)/Makefile.am.ide
+ libfftlib_la_SOURCES = $(redhawk_SOURCES_auto)
+-libfftlib_la_LIBADD = $(SOFTPKG_LIBS) $(REDHAWK_LIBS)
+-libfftlib_la_CPPFLAGS = -I $(srcdir)/include $(SOFTPKG_CFLAGS) $(REDHAWK_CFLAGS) $(BOOST_CPPFLAGS)
++libfftlib_la_LIBADD = $(PROJECTDEPS_LIBS) $(REDHAWK_LIBS)
++libfftlib_la_CPPFLAGS = -I $(srcdir)/include $(PROJECTDEPS_CFLAGS) $(REDHAWK_CFLAGS) $(BOOST_CPPFLAGS)
+ libfftlib_la_CXXFLAGS = -Wall
+ 
+ redhawk_HEADERS_auto ?= $(filter include/%,$(redhawk_SOURCES_auto))
+diff --git cpp/configure.ac cpp/configure.ac
+index 1d3f472..8bc819a 100644
+--- cpp/configure.ac
++++ cpp/configure.ac
+@@ -33,8 +33,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ 
+ # Dependencies
+ PKG_CHECK_MODULES([REDHAWK], [ossie >= 2.0])
+-PKG_CHECK_MODULES([PROJECTDEPS],   [fftw3 >= 3.0 fftw3f >= 3.0])
+-RH_SOFTPKG_CXX([/deps/rh/dsp/dsp.spd.xml],[cpp],[2.0])
++PKG_CHECK_MODULES([PROJECTDEPS],   [fftw3f >= 3.0 rh.dsp >= 2.0])
+ OSSIE_ENABLE_LOG4CXX
+ AX_BOOST_BASE([1.41])
+ AX_BOOST_SYSTEM
+diff --git cpp/rh.fftlib.pc.in cpp/rh.fftlib.pc.in
+index f6328ac..e8ddadc 100644
+--- cpp/rh.fftlib.pc.in
++++ cpp/rh.fftlib.pc.in
+@@ -23,7 +23,7 @@ includedir=@includedir@
+ 
+ Name: rh.fftlib
+ Description: basic-components signal processing shared library wrapping FFTW
+-Requires: rh.dsp >= 2.0 fftw3 >= 3.0 fftw3f >= 3.0
++Requires: rh.dsp >= 2.0 fftw3f >= 3.0
+ Version: 2.0.0
+-Libs: -L${libdir} -lfftlib -lfftw3 -lfftw3f
++Libs: -L${libdir} -lfftlib -lfftw3f
+ Cflags: -I${includedir}

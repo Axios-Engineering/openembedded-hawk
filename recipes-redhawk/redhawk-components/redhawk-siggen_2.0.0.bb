@@ -7,13 +7,9 @@ DEPENDS = "redhawk-bulkio"
 RDEPENDS_${PN} = "redhawk-bulkio"
 
 SRC_URI = "git://github.com/RedhawkSDR/SigGen.git;branch=master;protocol=git \
-file://01_Remove_x86_and_Impls.patch;patchdir=.. \
-file://03_Add_Missing_Files.patch; \
-file://02_Ossie_Check_fix.patch; \
-file://04_Prefix_to_SDRROOT.patch; \
 "
 
-SRCREV = "eb19c78d10e579d267d3f796f39eae922fc65f0b"
+SRCREV = "2.0.0"
 
 PR = "r0" 
 
@@ -24,7 +20,7 @@ OSSIEHOME = "/usr/lib/redhawk/core"
 SDRROOT = "/usr/lib/redhawk/sdr"
 
 FILES_${PN} += "${SDRROOT}/*"
-FILES_${PN}-dbg +="${SDRROOT}/dom/components/SigGen/cpp/.debug/SigGen"
+FILES_${PN}-dbg +="${SDRROOT}/dom/components/rh/SigGen/cpp/.debug/SigGen"
 
 inherit redhawk-component
 

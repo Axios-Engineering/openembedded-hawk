@@ -1,0 +1,13 @@
+diff --git src/Makefile.am src/Makefile.am
+index 7d0029d..a1e3209 100644
+--- src/Makefile.am
++++ src/Makefile.am
+@@ -34,7 +34,7 @@ if HAVE_JAVASUPPORT
+   OMNIJNI = omnijni
+ endif
+ 
+-SUBDIRS = acinclude etc $(OMNIJNI) base control tools xml idl testing
++SUBDIRS = acinclude etc $(OMNIJNI) base control tools xml idl
+ 
+ # Install makefile fragments
+ amdir = $(datadir)/aminclude/redhawk

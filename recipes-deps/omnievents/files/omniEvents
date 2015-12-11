@@ -1,0 +1,108 @@
+#! /bin/sh
+
+#                            Package   : omniEvents
+# omniorb-eventservice       Created   : 2004/07/11
+#                            Author    : Alex Tingle
+#   This file is part of the omniEvents application, most of which is licensed
+#   under the Lesser GPL. This file ONLY is hereby released into the public
+#   domain by Alex Tingle (2004/07/11).
+#
+#   Modified by REDHAWK (United States Government) - 2015
+
+#
+# This SysV init script is LSB 1.3 compliant.
+# It should work fine on any SysV system.
+#
+
+### BEGIN INIT INFO
+# Provides: omniorb-eventservice
+# Required-Start: $syslog $network
+# Should-Start: $omniorb-namingservice
+# Required-Stop: $syslog
+# Should-Stop: $omniorb-namingservice
+# Default-Start:
+# Default-Stop: 0 1 2 3 4 5 6
+# Short-Description: CORBA event service
+# Description: CORBA event service. http://www.omnievents.org/
+### END INIT INFO
+
+# Defaults for chkconfig in case LSB fails
+# chkconfig: - 91 09
+
+
+# ---------------------- the real stuff starts here----------------------------
+
+# You might want to tweak the location of the configuration file:
+CONFIGFILE=/etc/default/omniorb-eventservice
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/sbin/omniEvents
+NAME=omniEvents
+DESC="CORBA event service"
+
+test -f $DAEMON || exit 5
+#
+# Default parameters. Don't change these here. Change them by setting them in
+# file $CONFIGFILE
+test -z "$OMNIEVENTS_LOGDIR"  && OMNIEVENTS_LOGDIR=/var/lib/omniEvents
+test -z "$OMNIEVENTS_PORT"    && OMNIEVENTS_PORT=11169
+OMNIEVENTS_PIDFILE=/var/run/$NAME.pid
+
+# Load default preferences
+test -f $CONFIGFILE && . $CONFIGFILE
+
+# Calculate OPT_ALTERNATE & OPT_NS_NAME
+test -n "$OMNIEVENTS_ALTERNATE" && OPT_ALTERNATE="-a $OMNIEVENTS_ALTERNATE"
+test -n "$OMNIEVENTS_NS_NAME"   && OPT_NS_NAME="-N $OMNIEVENTS_NS_NAME"
+
+startOE() {
+  sleep 2 # take a little nap to make sure omniNames has been given enough time to come up.
+  # Make sure the naming service is available
+  /usr/bin/nameclt list > /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "omniEvents cannot reach the naming service"
+    exit 1
+  fi
+
+  test -d $OMNIEVENTS_LOGDIR || mkdir -p $OMNIEVENTS_LOGDIR
+  $DAEMON $OMNIEVENTS_OPTIONS -P $OMNIEVENTS_PIDFILE -l $OMNIEVENTS_LOGDIR \
+    -p $OMNIEVENTS_PORT $OPT_ALTERNATE $OPT_NS_NAME > /dev/null 2>&1
+  RC=$?
+  [ "$RC" -ne 0 ] && echo $"Starting $NAME" || echo $"Starting $NAME"
+  return $RC
+}
+
+stopOE() {
+  if [ ! -f $OMNIEVENTS_PIDFILE ] ; then
+    return 0
+  fi
+  start-stop-daemon --oknodo --stop --quiet \
+          --pidfile $OMNIEVENTS_PIDFILE --exec $DAEMON
+}
+
+restart() {
+    stopOE
+    startOE
+}
+
+case "$1" in
+  start)
+        startOE
+        ;;
+  stop)
+        stopOE
+        ;;
+  restart)
+        stopOE
+        startOE
+        ;;
+  *)
+        echo "Usage: $N {start|stop|restart}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+
+

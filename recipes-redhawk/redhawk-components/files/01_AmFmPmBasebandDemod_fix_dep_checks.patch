@@ -1,0 +1,29 @@
+diff --git cpp/Makefile.am cpp/Makefile.am
+index 145f0f0..e844e68 100644
+--- cpp/Makefile.am
++++ cpp/Makefile.am
+@@ -46,7 +46,7 @@ distclean-local:
+ # you wish to manually control these options.
+ include $(srcdir)/Makefile.am.ide
+ AmFmPmBasebandDemod_SOURCES = $(redhawk_SOURCES_auto)
+-AmFmPmBasebandDemod_LDADD = $(SOFTPKG_LIBS) $(PROJECTDEPS_LIBS) $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB) $(BOOST_REGEX_LIB) $(BOOST_SYSTEM_LIB) $(INTERFACEDEPS_LIBS) $(redhawk_LDADD_auto)
+-AmFmPmBasebandDemod_CXXFLAGS = -Wall $(SOFTPKG_CFLAGS) $(PROJECTDEPS_CFLAGS) $(BOOST_CPPFLAGS) $(INTERFACEDEPS_CFLAGS) $(redhawk_INCLUDES_auto)
++AmFmPmBasebandDemod_LDADD = $(PROJECTDEPS_LIBS) $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB) $(BOOST_REGEX_LIB) $(BOOST_SYSTEM_LIB) $(INTERFACEDEPS_LIBS) $(redhawk_LDADD_auto)
++AmFmPmBasebandDemod_CXXFLAGS = -Wall $(PROJECTDEPS_CFLAGS) $(BOOST_CPPFLAGS) $(INTERFACEDEPS_CFLAGS) $(redhawk_INCLUDES_auto)
+ AmFmPmBasebandDemod_LDFLAGS = -Wall $(redhawk_LDFLAGS_auto)
+ 
+diff --git cpp/configure.ac cpp/configure.ac
+index f260ef5..0c12e2b 100644
+--- cpp/configure.ac
++++ cpp/configure.ac
+@@ -30,9 +30,8 @@ OSSIE_SDRROOT_AS_PREFIX
+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ 
+ # Dependencies
+-PKG_CHECK_MODULES([PROJECTDEPS], [ossie >= 2.0 omniORB4 >= 4.1.0])
++PKG_CHECK_MODULES([PROJECTDEPS], [ossie >= 2.0 omniORB4 >= 4.1.0 rh.dsp >= 2.0])
+ PKG_CHECK_MODULES([INTERFACEDEPS], [bulkio >= 2.0])
+-RH_SOFTPKG_CXX([/deps/rh/dsp/dsp.spd.xml],[cpp],[2.0])
+ OSSIE_ENABLE_LOG4CXX
+ AX_BOOST_BASE([1.41])
+ AX_BOOST_SYSTEM

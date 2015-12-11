@@ -3,7 +3,7 @@ SECTION = "devel"
 PRIORITY = "optional"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75b02c2872421380bbd47781d2bd75d3"
-DEPENDS += "omniorb-native python"
+DEPENDS += "omniorb-native"
 DEPENDS_virtclass-native += "python-native"
 PR = "r2"
 
