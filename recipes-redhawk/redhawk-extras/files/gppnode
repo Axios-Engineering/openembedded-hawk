@@ -13,16 +13,19 @@
 #                    
 ### END INIT INFO
 
-OSSIEHOME=/usr/lib/redhawk/core
-SDRROOT=/usr/lib/redhawk/sdr
-PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
+export OSSIEHOME=/usr/lib/redhawk/core
+export SDRROOT=/usr/lib/redhawk/sdr
+export PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
+export LD_LIBRARY_PATH=$OSSIEHOME/lib:$OSSIEHOME/lib64:/usr/lib:/lib:$LD_LIBRARY_PATH
+
 NODENAME=DevMgr_GPP
 DevMgrPath=$SDRROOT/dev/nodes/$NODENAME
 DOMAIN=REDHAWK_DEV
 PIDFILE=/var/run/gppNode.pid
-LOGFILE=/var/log/gppnode.log
-DAEMON_ARGS="-d $DevMgrPath/DeviceManager.dcd.xml --pidfile $PIDFILE --daemon 2>&1 > $LOGFILE"
+LOGCFG=${SDRROOT}/gppnode.log4cxx
+
+DAEMON_ARGS="-d $DevMgrPath/DeviceManager.dcd.xml --pidfile $PIDFILE --daemon -logcfgfile $LOGCFG"
 
 do_start() {
   if [ -d $DevMgrPath ]

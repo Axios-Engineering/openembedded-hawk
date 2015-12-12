@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deviceconfiguration id="DCE:834c2597-6ef5-4300-a9eb-83376cae6ae2" name="DevMgr_GPP">
+    <devicemanagersoftpkg>
+        <localfile name="/mgr/DeviceManager.spd.xml"/>
+    </devicemanagersoftpkg>
+    <componentfiles>
+        <componentfile type="SPD" id="GPP_5281e1b0-3520-485e-b828-c2fa1c7252f4">
+            <localfile name="/nodes/DevMgr_GPP/GPP/GPP.spd.xml"/>
+        </componentfile>
+    </componentfiles>
+    <partitioning>
+        <componentplacement>
+            <componentfileref refid="GPP_5281e1b0-3520-485e-b828-c2fa1c7252f4"/>
+            <componentinstantiation id="DCE:17a12016-6c5d-4dad-8f23-b8ed86666111">
+                <usagename>GPP_1</usagename>
+            </componentinstantiation>
+        </componentplacement>
+    </partitioning>
+    <domainmanager>
+        <namingservice name="REDHAWK_DEV/REDHAWK_DEV"/>
+    </domainmanager>
+</deviceconfiguration>

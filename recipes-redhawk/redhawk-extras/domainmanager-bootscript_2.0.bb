@@ -7,6 +7,7 @@ PR = "r0"
 
 SRC_URI = "\
 file://domainManager \
+file://domainManager.log4cxx \
 file://COPYING \
 "
 
@@ -17,10 +18,19 @@ S = "${WORKDIR}"
 inherit update-rc.d
 
 INITSCRIPT_NAME = "domainManager"
-INITSCRIPT_PARAMS = "defaults 99"
+INITSCRIPT_PARAMS = "defaults 80"
+
+SDRROOT = "/usr/lib/redhawk/sdr"
+
+FILES_${PN} += " \
+${SDRROOT}/* \
+"
 
 do_install () {
         install -d ${D}${sysconfdir} ${D}${sysconfdir}/init.d 
         install -m 0755 ${WORKDIR}/domainManager ${D}${sysconfdir}/init.d/domainManager
+
+        install -d ${D}${SDRROOT}
+        install -m 0644 ${WORKDIR}/domainManager.log4cxx ${D}${SDRROOT}/domainManager.log4cxx
 }
 

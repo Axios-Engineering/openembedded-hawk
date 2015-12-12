@@ -19,7 +19,7 @@ SRCREV = "5c1850d806bb5412a30f422e394dad364a53a533"
 inherit autotools-brokensep pkgconfig pythonnative update-rc.d
 
 INITSCRIPT_NAME = "omniEvents"
-INITSCRIPT_PARAMS = "defaults 99"
+INITSCRIPT_PARAMS = "defaults 50"
 
 EXTRA_OECONF += "--with-omniorb=${STAGING_DIR_TARGET}/usr IDL=${STAGING_DIR_NATIVE}/usr/bin/omniidl --with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-thread=boost_thread"
 

@@ -13,4 +13,6 @@ RDEPENDS_${PN} = "\
     redhawk-bulkio \
     redhawk-frontend \
     redhawk-gpp \
+    gppnode-bootscript \
+    redhawk-gpp-profile \
     "

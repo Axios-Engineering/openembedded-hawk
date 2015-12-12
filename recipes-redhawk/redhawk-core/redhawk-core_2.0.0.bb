@@ -27,6 +27,7 @@ PR = "r0"
 S = "${WORKDIR}/git/src"
 
 PACKAGES += "${PN}-python"
+PROVIDES += "${PN}-python"
 
 FILES_${PN}-python += " \
 ${OSSIEHOME}/lib/python \

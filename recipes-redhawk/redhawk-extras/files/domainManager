@@ -13,16 +13,16 @@
 #                    
 ### END INIT INFO
 
-OSSIEHOME=/usr/lib/redhawk/core
-SDRROOT=/usr/lib/redhawk/sdr
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OSSIEHOME/lib:$OSSIEHOME/lib64
-PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
+export OSSIEHOME=/usr/lib/redhawk/core
+export SDRROOT=/usr/lib/redhawk/sdr
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OSSIEHOME/lib:$OSSIEHOME/lib64
+export PYTHONPATH=$OSSIEHOME/lib/python:$OSSIEHOME/lib64/python
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:$OSSIEHOME/bin:$SDRROOT/dev/devices/GPP/python
 DOMAIN=REDHAWK_DEV
 PIDFILE=/var/run/domain.pid
-LOGFILE=/var/log/domainManager.log
+LOGCFG=${SDRROOT}/domainManager.log4cxx
 
-DAEMON_ARGS="-D --pidfile $PIDFILE --daemon 2>&1 > $LOGFILE"
+DAEMON_ARGS="-D --pidfile $PIDFILE --daemon -logcfgfile $LOGCFG"
 
 do_start() {
   if [ -f $PIDFILE ]; then
