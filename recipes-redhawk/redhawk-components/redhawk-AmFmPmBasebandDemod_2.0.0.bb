@@ -19,7 +19,7 @@ S = "${WORKDIR}/git/cpp"
 FILES_${PN} += "${SDRROOT}/*"
 FILES_${PN}-dbg +="${SDRROOT}/dom/components/rh/AmFmPmBasebandDemod/cpp/.debug/AmFmPmBasebandDemod"
 
-inherit redhawk-component
+inherit redhawk-component redhawk-override-proc
 
 export PKG_CONFIG_PATH.=":${STAGING_DIR_TARGET}/${SDRROOT}/dom/deps/rh/dsp/cpp/lib/pkgconfig"
 

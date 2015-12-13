@@ -17,5 +17,5 @@ S = "${WORKDIR}/git/python"
 
 FILES_${PN} += "${SDRROOT}/*"
 
-inherit redhawk-component
+inherit redhawk-component redhawk-override-proc
 

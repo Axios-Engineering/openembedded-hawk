@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
 DEPENDS = "omnievents omniorbpy-native log4cxx omniorb e2fsprogs apr-util apr zip expat boost boost-native"
 RDEPENDS_${PN} = "omnievents log4cxx omniorb e2fsprogs apr-util apr zip expat boost"
-RDEPENDS_${PN}-python = "${PN} omniorbpy python-numpy python-threading python-numbers python-resource"
+RDEPENDS_${PN}-python = "${PN} omniorb-python omniorbpy python-numpy python-threading python-numbers python-resource"
 
 SRC_URI = "git://github.com/redhawksdr/framework-core.git;branch=master;protocol=git \
 file://00_core_add_xsd_files.patch \
@@ -74,5 +74,5 @@ ${OSSIEHOME}/share/* \
 ${OSSIEHOME}/lib/pkgconfig \
 "
 
-inherit redhawk-core
+inherit redhawk-core redhawk-override-proc
 

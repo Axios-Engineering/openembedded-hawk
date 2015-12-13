@@ -25,5 +25,5 @@ FILES_${PN}-dbg +="${SDRROOT}/dom/deps/rh/dsp/cpp/lib/.debug/libdsp.so.0.0.0"
 
 FILES_${PN}-staticdev +="${SDRROOT}/dom/deps/rh/dsp/cpp/lib/libdsp.a"
 
-inherit redhawk-sharedlib
+inherit redhawk-sharedlib redhawk-override-proc
 

@@ -26,7 +26,7 @@ FILES_${PN}-dbg +="${SDRROOT}/dom/deps/rh/fftlib/cpp/lib/.debug/libfftlib.so.0.0
 
 FILES_${PN}-staticdev +="${SDRROOT}/dom/deps/rh/fftlib/cpp/lib/libfftlib.a"
 
-inherit redhawk-sharedlib
+inherit redhawk-sharedlib redhawk-override-proc
 
 export PKG_CONFIG_PATH.=":${STAGING_DIR_TARGET}/${SDRROOT}/dom/deps/rh/dsp/cpp/lib/pkgconfig"
 

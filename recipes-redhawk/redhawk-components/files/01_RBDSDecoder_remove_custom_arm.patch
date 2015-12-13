@@ -1,0 +1,43 @@
+diff --git a/RBDSDecoder.spd.xml b/RBDSDecoder.spd.xml
+index 3da2336..81585d6 100644
+--- a/RBDSDecoder.spd.xml
++++ b/RBDSDecoder.spd.xml
+@@ -44,16 +44,4 @@ with this program.  If not, see http://www.gnu.org/licenses/.
+     <processor name="x86"/>
+     <processor name="x86_64"/>
+   </implementation>
+-  <implementation id="cpp_arm">
+-    <description>The implementation contains descriptive information about the template for a software component.</description>
+-    <code type="Executable">
+-      <localfile name="cpp_arm/RBDSDecoder"/>
+-      <entrypoint>cpp_arm/RBDSDecoder</entrypoint>
+-    </code>
+-    <compiler name="/usr/bin/gcc" version="4.1.2"/>
+-    <programminglanguage name="C++"/>
+-    <humanlanguage name="EN"/>
+-    <os name="Linux"/>
+-    <processor name="armv7l"/>
+-  </implementation>
+ </softpkg>
+diff --git a/cpp/configure.ac b/cpp/configure.ac
+index f73eecc..286945c 100644
+--- a/cpp/configure.ac
++++ b/cpp/configure.ac
+@@ -41,17 +41,6 @@ AX_BOOST_SYSTEM
+ AX_BOOST_THREAD
+ AX_BOOST_REGEX
+ 
+-case $host_cpu in
+-  *arm*)
+-             CPU_SPECIFIC_FLAGS='-mfpu=neon -ftree-vectorize -ffast-math -funsafe-math-optimizations -funsafe-loop-optimizations -ftree-loop-if-convert-stores -mfloat-abi=hard -ftree-vectorizer-verbose=1'
+-             BINDIR_SUFFIX='_arm'
+-             ;;
+-  *x86*)
+-             CPU_SPECIFIC_FLAGS=''
+-             BINDIR_SUFFIX=''
+-             ;;
+-esac
+-
+ AC_SUBST([CPU_SPECIFIC_FLAGS])
+ AC_SUBST([BINDIR_SUFFIX])
+ 

@@ -29,7 +29,7 @@ FILES_${PN}-dbg +="${SDRROOT}/dev/devices/RTL2832U/cpp/.debug/RTL2832U"
 
 # We have to inherit from pythonnative if we do stuff with the system python.
 # autotools-brokensep is the sasme as autotools but our build and src locations are the same since we cannot build away from our src.
-inherit autotools-brokensep pkgconfig pythonnative
+inherit autotools-brokensep pkgconfig pythonnative redhawk-override-proc
 
 EXTRA_OECONF += "--with-sdr=${SDRROOT} OSSIEHOME=${OSSIEHOME} SDRROOT=${SDRROOT} --with-boost=${STAGING_DIR_TARGET}/usr --with-boost-system=boost_system --with-boost-thread=boost_thread --with-boost-regex=boost_regex --disable-log4cxx"
 

@@ -22,5 +22,5 @@ SDRROOT = "/usr/lib/redhawk/sdr"
 FILES_${PN} += "${SDRROOT}/*"
 FILES_${PN}-dbg +="${SDRROOT}/dom/components/rh/SigGen/cpp/.debug/SigGen"
 
-inherit redhawk-component
+inherit redhawk-component redhawk-override-proc
 

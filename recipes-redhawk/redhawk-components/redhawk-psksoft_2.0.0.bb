@@ -18,5 +18,5 @@ S = "${WORKDIR}/git/cpp"
 FILES_${PN} += "${SDRROOT}/*"
 FILES_${PN}-dbg +="${SDRROOT}/dom/components/rh/psk_soft/cpp/.debug/psk_soft"
 
-inherit redhawk-component
+inherit redhawk-component redhawk-override-proc
 

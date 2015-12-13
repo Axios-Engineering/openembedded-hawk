@@ -29,7 +29,7 @@ FILES_${PN}-dbg += "${SDRROOT}/dev/devices/GPP/cpp/.debug/GPP"
 FILES_${PN}-profile += "${SDRROOT}/dev/nodes/DevMgr_GPP/DeviceManager.dcd.xml"
 FILES_${PN}-profile += "${SDRROOT}/dev/nodes/DevMgr_GPP/GPP/*.xml"
 
-inherit redhawk-device
+inherit redhawk-device redhawk-override-proc
 
 do_install_append() {
     install -d ${D}${SDRROOT}/dev/nodes/DevMgr_GPP/GPP
