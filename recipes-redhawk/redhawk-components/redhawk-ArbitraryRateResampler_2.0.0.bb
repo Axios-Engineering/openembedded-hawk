@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/ArbitraryRateResampler.git;branch=master;
 file://01_ArbitraryRateResampler_fix_dep_checks.patch \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

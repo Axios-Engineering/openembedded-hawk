@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/TuneFilterDecimate.git;branch=master;prot
 file://01_tunefilterdecimate_fix_dep_checks.patch \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

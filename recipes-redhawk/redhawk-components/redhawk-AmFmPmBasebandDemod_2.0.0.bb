@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/AmFmPmBasebandDemod.git;branch=master;pro
 file://01_AmFmPmBasebandDemod_fix_dep_checks.patch \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

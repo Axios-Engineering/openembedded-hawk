@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/fastfilter.git;branch=master;protocol=git
 file://01_fastfilter_fix_dep_checks.patch \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "redhawk-bulkio-python redhawk-frontend-python"
 SRC_URI = "git://github.com/RedhawkSDR/FrontEndController.git;branch=master;protocol=git \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

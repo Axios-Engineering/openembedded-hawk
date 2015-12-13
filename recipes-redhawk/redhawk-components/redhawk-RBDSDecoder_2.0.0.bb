@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/RBDSDecoder.git;branch=master;protocol=gi
 file://01_RBDSDecoder_remove_custom_arm.patch;patchdir=.. \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

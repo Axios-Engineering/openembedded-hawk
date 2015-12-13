@@ -9,6 +9,7 @@ RDEPENDS_${PN} = "redhawk-bulkio"
 SRC_URI = "git://github.com/RedhawkSDR/SigGen.git;branch=master;protocol=git \
 "
 
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 

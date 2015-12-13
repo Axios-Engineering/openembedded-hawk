@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "redhawk-bulkio"
 SRC_URI = "git://github.com/RedhawkSDR/psk_soft.git;branch=master;protocol=git \
 "
 
-# Track the latest
+# Build the 2.0 release
 SRCREV = "2.0.0"
 
 PR = "r0" 
