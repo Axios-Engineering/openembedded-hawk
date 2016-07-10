@@ -10,7 +10,7 @@ file://01_RBDSDecoder_remove_custom_arm.patch;patchdir=.. \
 "
 
 # Build the 2.0 release
-SRCREV = "2.0.0"
+SRCREV = "2.0.1"
 
 PR = "r0" 
 

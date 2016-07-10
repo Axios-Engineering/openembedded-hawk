@@ -14,7 +14,7 @@ file://GPP/GPP.scd.xml \
 file://GPP/GPP.prf.xml \
 "
 
-SRCREV = "2.0.0"
+SRCREV = "2.0.1"
 
 PR = "r0" 
 

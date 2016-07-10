@@ -14,7 +14,7 @@ file://07_Fix_rtl_version_constraint.patch \
 file://08_Fix_UUID_Link_HACK.patch \
 "
 
-SRCREV = "2a69aceedea4d693b1c1b33b226df1f2fc3135dd"
+SRCREV = "2.0.0"
 
 PR = "r0" 
 

@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/RedhawkSDR/SigGen.git;branch=master;protocol=git \
 "
 
 # Build the 2.0 release
-SRCREV = "2.0.0"
+SRCREV = "2.0.1"
 
 PR = "r0" 
 

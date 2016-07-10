@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/RedhawkSDR/frontendInterfaces.git;branch=master;prot
 file://03_Add_Missing_Files.patch \
 file://05_Remove_Custom_Ossie_Check_Frontend.patch \
 "
-SRCREV = "2.3.0"
+SRCREV = "2.3.1"
 
 PR = "r0" 
 

@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/RedhawkSDR/framework-bulkioInterfaces.git;branch=mas
 file://03_Add_Missing_Files.patch \
 file://05_Remove_Custom_Ossie_Check_BulkIO.patch \
 "
-SRCREV = "2.0.0"
+SRCREV = "2.0.1"
 
 PR = "r0" 
 
