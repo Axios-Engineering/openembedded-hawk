@@ -6,6 +6,9 @@ inherit autotools-brokensep pkgconfig pythonnative
 # This file sets OSSIEHOME and other environment variables used by autotools
 include redhawk-env.inc
 
+# Yocto no longer uses -fpermissive by default however the framework needs it for xsd 3.3
+CXXFLAGS_append = " -fpermissive "
+
 # Needed so that when the python distutils is run it can get the system prefix which, since it's the build system python will be /.../x86_64-linux/usr and replace it with our host systems name.
 do_configure_prepend() {
   export BUILD_SYS=${BUILD_SYS}
