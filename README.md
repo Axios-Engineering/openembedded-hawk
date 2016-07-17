@@ -39,7 +39,7 @@ Getting Started
     cd poky
     git clone https://github.com/Axios-Engineering/openembedded-hawk.git meta-redhawk
     ```
-1. Optionally clone meta-openembedded for additional dependencies (like fftw)
+1. Optionally clone meta-openembedded for additional dependencies (like fftw and python-xml)
 
     ```
     git clone -b dizzy git://git.openembedded.org/meta-openembedded
@@ -58,7 +58,7 @@ Getting Started
     IMAGE_INSTALL_append = " packagegroup-redhawk-gpp "
     ```
 
-1. Add the meta-redhawk directory to the BBLAYERS variable in conf/bblayers.conf so yocto knows where to search for our custom recipes as well as meta-openembedded/meta-oe if you chose to optionally clone that as well.
+1. Add the meta-redhawk directory to the BBLAYERS variable in conf/bblayers.conf so yocto knows where to search for our custom recipes as well as meta-openembedded/meta-oe and meta-openembedded/meta-python if you chose to optionally clone that as well.
 
 1. Build an image:
     ```
