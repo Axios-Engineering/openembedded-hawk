@@ -7,6 +7,7 @@ DEPENDS = "libusb1"
 RDEPENDS_${PN} = "libusb1"
 
 SRC_URI = "git://git.osmocom.org/rtl-sdr.git;branch=master;protocol=git \
+file://01_fix_pkgconfig.patch \
 "
 
 SRCREV = "df9596b2d1ebd36cdb14549cfdd76c25092e14d0"

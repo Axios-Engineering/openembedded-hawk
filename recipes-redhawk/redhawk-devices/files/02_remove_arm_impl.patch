@@ -1,0 +1,74 @@
+diff --git RTL2832U.spd.xml RTL2832U.spd.xml
+index 89b1b74..b378f90 100644
+--- RTL2832U.spd.xml
++++ RTL2832U.spd.xml
+@@ -44,16 +44,4 @@ along with this program.  If not, see http://www.gnu.org/licenses/.
+     <processor name="x86"/>
+     <processor name="x86_64"/>
+   </implementation>
+-  <implementation id="cpp_arm">
+-    <description>RTL2832U implementation for ARM processors.</description>
+-    <code type="Executable">
+-      <localfile name="cpp_arm/RTL2832U"/>
+-      <entrypoint>cpp_arm/RTL2832U</entrypoint>
+-    </code>
+-    <compiler name="/usr/bin/gcc" version="4.1.2"/>
+-    <programminglanguage name="C++"/>
+-    <humanlanguage name="EN"/>
+-    <os name="Linux"/>
+-    <processor name="armv7l"/>
+-  </implementation>
+ </softpkg>
+diff --git cpp/Makefile.am cpp/Makefile.am
+index cedc3f6..602d5b9 100644
+--- cpp/Makefile.am
++++ cpp/Makefile.am
+@@ -19,12 +19,12 @@
+ #
+ 
+ ossieName = rh.RTL2832U
+-bindir = $(prefix)/dev/devices/rh/RTL2832U/cpp$(BINDIR_SUFFIX)/
++bindir = $(prefix)/dev/devices/rh/RTL2832U/cpp/
+ bin_PROGRAMS = RTL2832U
+ 
+ xmldir = $(prefix)/dev/devices/rh/RTL2832U/
+ dist_xml_DATA = ../RTL2832U.scd.xml ../RTL2832U.prf.xml ../RTL2832U.spd.xml
+-confdir = $(prefix)/dev/devices/rh/RTL2832U/
++confdir = $(SDR_ROOT)/dev/devices/rh/RTL2832U/
+ dist_conf_SCRIPTS = ../nodeconfig.py
+ ACLOCAL_AMFLAGS = -I m4 -I${OSSIEHOME}/share/aclocal/ossie
+ AUTOMAKE_OPTIONS = subdir-objects
+@@ -52,7 +52,7 @@ distclean-local:
+ include $(srcdir)/Makefile.am.ide
+ RTL2832U_SOURCES = $(redhawk_SOURCES_auto)
+ RTL2832U_LDADD = $(SOFTPKG_LIBS) $(PROJECTDEPS_LIBS) $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB) $(BOOST_REGEX_LIB) $(BOOST_SYSTEM_LIB) $(INTERFACEDEPS_LIBS) $(redhawk_LDADD_auto) $(LIBRTLSDR_LIBS) $(LIBUUID_LIBS)
+-RTL2832U_CXXFLAGS = -Wall $(SOFTPKG_CFLAGS) $(PROJECTDEPS_CFLAGS) $(BOOST_CPPFLAGS) $(INTERFACEDEPS_CFLAGS) $(redhawk_INCLUDES_auto) $(LIBRTLSDR_FLAGS) $(LIBUUID_FLAGS) $(CPU_SPECIFIC_FLAGS)
++RTL2832U_CXXFLAGS = -Wall $(SOFTPKG_CFLAGS) $(PROJECTDEPS_CFLAGS) $(BOOST_CPPFLAGS) $(INTERFACEDEPS_CFLAGS) $(redhawk_INCLUDES_auto) $(LIBRTLSDR_FLAGS) $(LIBUUID_FLAGS)
+ RTL2832U_LDFLAGS = -Wall $(redhawk_LDFLAGS_auto)
+ 
+ create-rtl2832u-node: install-am
+diff --git cpp/configure.ac cpp/configure.ac
+index 0555b32..83f81b2 100644
+--- cpp/configure.ac
++++ cpp/configure.ac
+@@ -50,20 +50,6 @@ AX_BOOST_SYSTEM
+ AX_BOOST_THREAD
+ AX_BOOST_REGEX
+ 
+-case $host_cpu in
+-  *arm*)
+-             CPU_SPECIFIC_FLAGS='-mfpu=neon -ftree-vectorize -ffast-math -funsafe-math-optimizations -funsafe-loop-optimizations -ftree-loop-if-convert-stores -mfloat-abi=hard -ftree-vectorizer-verbose=1'
+-             BINDIR_SUFFIX='_arm'
+-             ;;
+-  *x86*)
+-             CPU_SPECIFIC_FLAGS=''
+-             BINDIR_SUFFIX=''
+-             ;;
+-esac
+-
+-AC_SUBST([CPU_SPECIFIC_FLAGS])
+-AC_SUBST([BINDIR_SUFFIX])
+-
+ AC_CONFIG_FILES([Makefile])
+ AC_OUTPUT
+ 
