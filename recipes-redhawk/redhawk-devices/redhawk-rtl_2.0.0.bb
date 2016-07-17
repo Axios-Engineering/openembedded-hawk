@@ -18,6 +18,6 @@ PR = "r0"
 S = "${WORKDIR}/git/cpp"
 
 FILES_${PN} += "${SDRROOT}/*"
-FILES_${PN}-dbg +="${SDRROOT}/dev/devices/RTL2832U/cpp/.debug/RTL2832U"
+FILES_${PN}-dbg +="${SDRROOT}/dev/devices/rh/RTL2832U/cpp/.debug/RTL2832U"
 
 inherit redhawk-device redhawk-override-proc
