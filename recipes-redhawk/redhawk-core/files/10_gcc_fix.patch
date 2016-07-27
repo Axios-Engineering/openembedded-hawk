@@ -1,0 +1,41 @@
+# Patch provided from http://stackoverflow.com/questions/38571741
+# user bhilburn
+diff --git a/src/control/framework/nodebooter.cpp b/src/control/framework/nodebooter.cpp
+index d79c291..dbd97ad 100644
+--- a/src/control/framework/nodebooter.cpp
++++ b/src/control/framework/nodebooter.cpp
+@@ -141,7 +141,7 @@ void loadPRFExecParams (const std::string& prfFile, ExecParams& execParams)
+         prf.load(prfStream);
+     } catch (const ossie::parser_error& ex) {
+         std::string parser_error_line = ossie::retrieveParserErrorLineNumber(ex.what());
+-        LOG_ERROR(nodebooter, "Failed to parse PRF file " << prfStream<< ". " << parser_error_line << "The XML parser returned the following error: " << ex.what());
++        LOG_ERROR(nodebooter, "Failed to parse PRF file " << prfFile<< ". " << parser_error_line << "The XML parser returned the following error: " << ex.what());
+         exit(EXIT_FAILURE);
+     }
+     prfStream.close();
+diff --git a/src/control/sdr/dommgr/ApplicationFactory_impl.cpp b/src/control/sdr/dommgr/ApplicationFactory_impl.cpp
+index d370519..92699e0 100644
+--- a/src/control/sdr/dommgr/ApplicationFactory_impl.cpp
++++ b/src/control/sdr/dommgr/ApplicationFactory_impl.cpp
+@@ -194,7 +194,7 @@ void ApplicationFactory_impl::ValidateSPD(CF::FileManager_ptr fileMgr,
+                                           const bool require_prf, 
+                                           const bool require_scd) {
+   SoftPkg pkg;
+-  ValidateSPD(fileMgr, pkg, false, false );
++  ValidateSPD(fileMgr, pkg, sfw_profile, require_prf, require_scd);
+ }
+
+ void ApplicationFactory_impl::ValidateSPD(CF::FileManager_ptr fileMgr, 
+diff --git a/src/control/sdr/dommgr/applicationSupport.cpp b/src/control/sdr/dommgr/applicationSupport.cpp
+index 1daa7ce..fbb5ac8 100644
+--- a/src/control/sdr/dommgr/applicationSupport.cpp
++++ b/src/control/sdr/dommgr/applicationSupport.cpp
+@@ -853,7 +853,7 @@ const bool  ComponentInfo::isScaCompliant()
+
+ bool ComponentInfo::isAssignedToDevice() const
+ {
+-    return assignedDevice;
++  return static_cast<bool>(assignedDevice);
+ }
+
+ bool ComponentInfo::checkStruct(CF::Properties &props)

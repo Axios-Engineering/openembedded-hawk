@@ -15,6 +15,7 @@ file://06_core_Fix_Idl_prefix.patch \
 file://07_core_arm_based_device_manager.patch \
 file://08_core_remove_csh_scripts.patch \
 file://09_core_allow_idl_dir_set.patch \
+file://10_gcc_fix.patch;striplevel=2 \
 file://11_core_fix_sharedlib_prefix.patch \
 "
 
