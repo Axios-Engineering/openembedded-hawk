@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/RedhawkSDR/FrontEndController.git;branch=master;prot
 "
 
 # Build the 2.0 release
-SRCREV = "2.0.0"
+SRCREV = "70749b85d1d829b728b1c1a76704bdebbf3b1b22"
 
 PR = "r0" 
 

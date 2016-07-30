@@ -19,6 +19,7 @@ do_configure_prepend() {
   # prefix is overused term, I think they mean SDR_ROOT
   sed -i 's/xmldir = $(prefix)/xmldir = $(SDR_ROOT)/g' Makefile.am
   sed -i 's/bindir = $(prefix)/bindir = $(SDR_ROOT)/g' Makefile.am
+  sed -i 's/domdir = $(prefix)/domdir = $(SDR_ROOT)/g' Makefile.am
   sed -i 's,${prefix}/dom/deps,${SDR_ROOT}/dom/deps,g' configure.ac
 
   # Makefiles have started adding the OSSIEHOME m4 files to the aclocal path but it doesnt work quite right with out setup 
